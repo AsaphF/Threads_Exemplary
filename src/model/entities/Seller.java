@@ -1,19 +1,25 @@
-package mode.entities;
+package model.entities;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
-public class Seller {
+public class Seller implements Serializable{
+	private static final long serialVersionUID = 1L;
+	
+	// Class propierties
 	private Integer id;
 	private String name;
 	private String email;
 	private Date birthDate;
 	private Double baseSalary;
 	
+	private Department department;
+	
+	// Const
 	public Seller() {
 	}
-	public Seller(Integer id, String name, String email, Date birthDate, Double baseSalary) {
-		super();
+	public Seller(Integer id, String name, String email, Date birthDate, Double baseSalary, Department department) {
 		this.id = id;
 		this.name = name;
 		this.email = email;
@@ -21,6 +27,7 @@ public class Seller {
 		this.baseSalary = baseSalary;
 	}
 	
+	// Setters and Getters
 	public Integer getId() {
 		return id;
 	}
@@ -52,7 +59,14 @@ public class Seller {
 
 		this.baseSalary = baseSalary;
 	}
+	public Department getDepartment() {
+		return department;
+	}
+	public void setDepartment(Department department) {
+		this.department = department;
+	}
 	
+	// Misc
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
