@@ -93,7 +93,47 @@ public class SellerDaoJDBC implements SellerDao {
 		}
 		
 	}
+	@Override
+	public void findByDepartment(Integer id) {
+		PreparedStatement st = null;
+		ResultSet rs = null;
+		
+		try {
+			st = coon.prepareStatement(
+				"SELECT seller.*, department.Name as DepName "
+			  + "FROM seller INNER JOIN department "
+			  + "ON seller.departmentId = department.Id "
+			  + "WHERE department.id = ? "
+			  + "ORDER BY Name"
+				);
+			
+			st.setInt(1, id);
+			rs = st.executeQuery();
+			
+//			if (!rs.next()) {
+//				return null;
+//			}
+			
+			while (rs.next()) {
+				System.out.println(rs.getString("name"));
+			}
+			
+//			Department dep = instantiateDepartment(rs);
+//
+//			Seller seller = instantiateSeller(rs, dep);
+//			
+//			return seller;
 
+		} catch (Exception e) {
+			// TODO: handle exception
+			throw new DbException(e.getMessage());
+		} 
+		finally {
+			DB.closeStatement(st);
+			DB.closeResult(rs);
+		}
+		
+	}
 
 	@Override
 	public List<Seller> findAll() {
@@ -117,4 +157,5 @@ public class SellerDaoJDBC implements SellerDao {
 		seller.setDepartment(dep);
 		return seller;
 	}
+
 }
