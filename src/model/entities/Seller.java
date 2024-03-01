@@ -1,8 +1,8 @@
 package model.entities;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.Objects;
+import java.sql.Date;
 
 public class Seller implements Serializable{
 	private static final long serialVersionUID = 1L;
@@ -15,7 +15,7 @@ public class Seller implements Serializable{
 	private Double baseSalary;
 	
 	private Department department;
-	
+
 	// Const
 	public Seller() {
 	}
