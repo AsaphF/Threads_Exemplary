@@ -101,12 +101,11 @@ public class SellerDaoJDBC implements SellerDao {
 	public void deleteById(Integer id) {
 		PreparedStatement st = null;
 		ResultSet rs = null;
-	
+
 		try {
 			st = conn.prepareStatement("DELETE FROM seller WHERE id = ?");
 			
 			st.setInt(1, id);
-			rs = st.executeQuery();
 			
 			int rowsAffected = st.executeUpdate(); // Execute the DELETE statement
 		    System.out.println("Number of rows affected: " + rowsAffected);
@@ -163,7 +162,7 @@ public class SellerDaoJDBC implements SellerDao {
 	public List<Seller> findByDepartment(Integer id) {
 		PreparedStatement st = null;
 		ResultSet rs = null;
-	
+
 		try {
 			st = conn.prepareStatement(
 				"SELECT seller.*, department.Name as DepName "
