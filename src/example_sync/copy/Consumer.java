@@ -3,25 +3,21 @@ package example_sync.copy;
 
 public class Consumer implements Runnable {
 	 Producer producer;
+	 String name;
 	 
-	 Consumer( Producer producer ) {
+	 public Consumer( Producer producer, String name ) {
 		 this.producer = producer;
+		 this.name = name;
 	 }
 	 
 	 public void run( ) {
 		 while ( true ) {
 			 String message = producer.getMessage( );
+			 System.out.println("Consumer " + name);
 			 System.out.println("Got message: " + message);
 			 try {
 				 Thread.sleep( 2000 );
 			 } catch ( InterruptedException e ) { }
 		 }
-	 }
-	 
-	 public static void main(String args[]) {
-	 	Producer producer = new Producer( );
-	 	new Thread( producer ).start( );
-	 	Consumer consumer = new Consumer( producer );
-	 	new Thread( consumer ).start( );
 	 }
 	}

@@ -1,18 +1,18 @@
 package Application;
-import example_basis.MyRunnable;
-import example_basis.MyThread;
+
+import example_sync.copy.Consumer;
+import example_sync.copy.Producer;
 
 public class Program {
 	public static void main(String[] args) {
-		MyThread firstOne = new MyThread();
-		
-		MyRunnable runnableOne = new MyRunnable();
-		
-		Thread secondOne = new Thread(runnableOne);
-		
-		firstOne.setPriority(10);
-		secondOne.start();
-		firstOne.start();
+		Producer producer = new Producer( );
+	 	new Thread( producer ).start( );
+	 	
+	 	Consumer consumer1= new Consumer( producer, "Primeiro" );
+	 	new Thread( consumer1 ).start( );
+	 	
+	 	Consumer consumer2 = new Consumer( producer, "Segundo" );
+	 	new Thread( consumer2 ).start( );
 
     }
 

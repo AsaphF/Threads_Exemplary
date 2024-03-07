@@ -12,7 +12,7 @@ public class Producer implements Runnable{
 		 while ( true ) {
 			 
 			 putMessage( );
-		 
+			 System.out.println("Adicionou");
 			 try {
 			 
 				 Thread.sleep( 1000 );
@@ -25,22 +25,22 @@ public class Producer implements Runnable{
 		while ( messages.size( ) >= MAXQUEUE )
 			try {
 				wait( );
+				 System.out.println("Cheio");
 			} catch( InterruptedException e ) { }
 		
 		messages.add( new java.util.Date( ).toString( ) );
-		notify( );
+		notifyAll( );
  	}
 	 
 	 // Chamado pelo Consumer
 	 public synchronized String getMessage( ) {
 		 while ( messages.size( ) == 0 )
 			 try {
-				 notify( );
+				 notifyAll( );
 				 wait( );
 			 } catch( InterruptedException e ) { }
-		 
 		 String message = (String)messages.remove(0);
-		 notify( );
+		 notifyAll( );
 		 return message;
 	 	}
 	}
